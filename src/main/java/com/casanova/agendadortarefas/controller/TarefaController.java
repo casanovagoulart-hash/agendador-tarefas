@@ -43,4 +43,10 @@ public class TarefaController {
         tarefaService.deletaTarefa(id, token);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping
+    public ResponseEntity<TarefaDTO> atualizaTarefa(@RequestBody TarefaDTO dto,
+                                                    @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(tarefaService.atualizaTarefa(token, dto));
+    }
 }

@@ -51,6 +51,16 @@ public List<TarefaDTO> buscaTarefasAgendadasPorUsuario(String token) {
 }
 
     public void deletaTarefa(Long id, String token) {
+        String email = jwtUtil.extractEmailToken(token.substring(7));
+        tarefaRepository.deleteByIdAndEmailUsuario(id, email);
+    }
 
+    public TarefaDTO atualizaTarefa(String token, TarefaDTO dto) {
+        String email = jwtUtil.extractEmailToken(token.substring(7));
+        dto.setEmail(email);
+        TarefasEntity entity = tarefaMapper.paraTarefasEntity(dto);
+
+        return tarefaMapper.paraTarefaDTO(
+                tarefaRepository.save(entity));
     }
 }
