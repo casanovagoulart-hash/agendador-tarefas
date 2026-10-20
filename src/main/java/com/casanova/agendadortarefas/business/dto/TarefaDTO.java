@@ -16,11 +16,14 @@ public class TarefaDTO {
     private String id;
     private String nomeTarefa;
     private String descrIcao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
     private LocalDateTime dataCriacao;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
     private LocalDateTime dataEvento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
     private String emailUsuario;
     private LocalDateTime dataAteracao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
     private StatusNotificacaoEnum statusNotificacaoEnum;
 
     public void setEmail(String email) {

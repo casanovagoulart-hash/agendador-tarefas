@@ -32,7 +32,6 @@ public class JwtUtil {
     }
 
 
-
     // Extrai as claims do token JWT (informações adicionais do token)
     // "Claims" são os dados que ficam dentro do token (e-mail, data de emissão, data de expiração).
     // parseSignedClaims é quem CONFERE o token: recalcula a assinatura com a chave secreta e compara.
