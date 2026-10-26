@@ -32,7 +32,6 @@ public class JwtUtil {
     }
 
 
-
     // Extrai as claims do token JWT (informações adicionais do token)
     // "Claims" são os dados que ficam dentro do token (e-mail, data de emissão, data de expiração).
     // parseSignedClaims é quem CONFERE o token: recalcula a assinatura com a chave secreta e compara.
@@ -70,4 +69,16 @@ public class JwtUtil {
         // Verifica se o nome de usuário do token corresponde ao fornecido e se o token não está expirado
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
+
+    public String extractEmailToken(String token) {
+        // Delega para o método seguro que lê o "Subject" (onde o e-mail é guardado)
+        return extrairEmaildoToken(token);
+    }
+
+   /* public String extractEmailToken(String substring) {
+        return substring.substring(substring.indexOf("email") + 7,
+                substring.indexOf("\"", substring.indexOf("email") + 7));
+    } */
+
+
 }
