@@ -43,4 +43,7 @@ public class TarefasEntity {
     private LocalDateTime dataAteracao;
     private StatusNotificacaoEnum statusNotificacaoEnum;
 
+    public void setStatusNotificacao(StatusNotificacaoEnum status) {
+        this.statusNotificacaoEnum = status;
+    }
 }
