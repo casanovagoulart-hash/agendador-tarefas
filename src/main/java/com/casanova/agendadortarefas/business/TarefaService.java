@@ -39,7 +39,8 @@ public TarefaDTO gravaTarefa(String token, TarefaDTO dto) {
 public List<TarefaDTO> buscaTarefasAgendadasPorPeriodo(LocalDateTime dataInicial, LocalDateTime dataFinal) {
 
     return tarefaMapper.paraListaTarefaDTO(
-            tarefaRepository.findByDataEventoBetween(dataInicial, dataFinal));
+            tarefaRepository.findByDataEventoBetweenAndStatusNotificacaoEnum(dataInicial,
+                    dataFinal, StatusNotificacaoEnum.PENDENTE));
 
 }
 
