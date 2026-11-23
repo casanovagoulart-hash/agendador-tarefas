@@ -7,20 +7,22 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-@Service // Apenas @Service: esta classe é uma regra de negócio, não um repositório
-public class UserDetailsServiceImpl{
+@Service
+public class UserDetailsServiceImpl {
 
     @Autowired
     private UsuarioClient client;
 
-    public UserDetails carregaDadosUsuario(String mail, String token){
+    public UserDetails carregaDadosUsuario(String mail, String token) {
+        UsuarioDTO usuarioDTO = client.buscaUsuarioPorEmail(mail, token);
 
-        UsuarioDTO usuarioDTO= client.buscaUsuarioPorEmail(mail, token);
+        // SEGURANÇA: Passamos password("") porque o usuário já foi validado via assinatura JWT.
+        // Isso permite que o microsserviço 'usuario' oculte o hash da senha na resposta JSON
+        // sem causar IllegalArgumentException no construtor do UserDetails.
         return User
-                .withUsername(usuarioDTO.getEmail()) // Define o nome de usuário como o e-mail
-                .password(usuarioDTO.getSenha()) // Define a senha (precisa estar criptografada com BCrypt no banco)
-                .roles("USER") // Define o perfil de acesso; sem isso o usuário fica sem permissões
+                .withUsername(usuarioDTO.getEmail())
+                .password("")
+                .roles("USER")
                 .build();
     }
-
 }
