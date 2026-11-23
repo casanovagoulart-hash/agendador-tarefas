@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-
 @Builder
 @Getter
 @Setter
@@ -15,15 +14,24 @@ import java.time.LocalDateTime;
 public class TarefaDTO {
     private String id;
     private String nomeTarefa;
-    private String descrIcao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
+
+    // CORREÇÃO: Padronizado para 'descricao' para espelhar exatamente o JSON enviado pelo BFF
+    private String descricao;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataCriacao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataEvento;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
+
+    // CORREÇÃO: Removido @JsonFormat deste campo (String de e-mail não é data)
     private String emailUsuario;
-    private LocalDateTime dataAteracao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyy HH:mm:ss")
+
+    // CORREÇÃO: Ajustado de 'dataAteracao' para 'dataAlteracao' e aplicada máscara ISO/BR
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime dataAlteracao;
+
+    // CORREÇÃO: Removido @JsonFormat deste campo (Enum já serializa pelo nome)
     private StatusNotificacaoEnum statusNotificacaoEnum;
 
     public void setEmail(String email) {
